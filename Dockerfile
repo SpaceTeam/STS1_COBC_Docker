@@ -10,12 +10,12 @@ RUN git clone https://github.com/ETLCPP/etl.git \
 && git clone https://github.com/foonathan/type_safe.git \
 && git clone https://github.com/foonathan/debug_assert.git \
 && git clone https://github.com/catchorg/Catch2.git \
-&& git clone https://github.com/SpaceTeam/rodos.git 
-
-RUN cd rodos && find . -name linux-x86.cmake | xargs cp -t $HOME -v
+&& git clone --branch st_develop https://github.com/SpaceTeam/rodos.git 
 
 WORKDIR rodos
-RUN cmake --toolchain cmake/port/linux-x86.cmake -S . -B build 
+RUN git status
+RUN find . -name linux-x86.cmake | xargs cp -t $HOME -v
+RUN cmake --toolchain /linux-x86.cmake -S . -B build 
 RUN cmake --build build
 RUN cmake --install build
 WORKDIR $HOME
