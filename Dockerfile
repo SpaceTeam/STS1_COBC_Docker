@@ -21,18 +21,21 @@ RUN cmake --install build
 WORKDIR $HOME
 
 WORKDIR etl
-RUN cmake -S . -B build && \
-cmake --install build
+RUN git checkout 20.32.1
+RUN cmake -S . -B build
+RUN cmake --install build
 WORKDIR $HOME
 
 WORKDIR debug_assert
-RUN cmake --toolchain /linux-x86.cmake -S . -B build && \
-cmake --install build
+RUN git checkout v1.3.3
+RUN cmake --toolchain /linux-x86.cmake -S . -B build
+RUN cmake --install build
 WORKDIR $HOME
 
 WORKDIR type_safe
-RUN cmake --toolchain /linux-x86.cmake -S . -B build && \
-cmake --install build
+RUN git checkout v0.2.2
+RUN cmake --toolchain /linux-x86.cmake -S . -B build
+RUN cmake --install build
 WORKDIR $HOME
 
 WORKDIR Catch2
