@@ -21,7 +21,7 @@ RUN cmake --install build
 WORKDIR $HOME
 
 WORKDIR etl
-RUN cmake --toolchain /linux-x86.cmake -S . -B build && \
+RUN cmake -S . -B build && \
 cmake --install build
 WORKDIR $HOME
 
