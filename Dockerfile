@@ -21,7 +21,7 @@ RUN cmake --install build
 WORKDIR $HOME
 
 WORKDIR etl
-RUN git checkout 20.32.1
+RUN git checkout cceb5038664a4fa363e79709bc08bd0bb356ae50
 RUN cmake -S . -B build
 RUN cmake --install build
 WORKDIR $HOME
