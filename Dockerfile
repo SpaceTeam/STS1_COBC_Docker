@@ -27,14 +27,14 @@ RUN cmake --install build
 WORKDIR $HOME
 
 WORKDIR debug_assert
-RUN git checkout v1.3.3
-RUN cmake --toolchain /linux-x86.cmake -S . -B build
+RUN git checkout c0b325e9023cc021bce0d23c8b4211f8e5b071d0
+RUN cmake -S . -B build
 RUN cmake --install build
 WORKDIR $HOME
 
 WORKDIR type_safe
-RUN git checkout v0.2.2
-RUN cmake --toolchain /linux-x86.cmake -S . -B build
+RUN git checkout b9138d8a26ea9bbab965f87ee925f53fde025fd9
+RUN cmake -S . -B build
 RUN cmake --install build
 WORKDIR $HOME
 
