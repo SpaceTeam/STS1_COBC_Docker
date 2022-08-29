@@ -22,7 +22,7 @@ jobs:
             latest=auto
           tags: |
             type=semver,pattern={{version}}
-            type=semver,pattern={{version}},suffix=full
+            type=semver,pattern={{version}},suffix=-full
       -
         name: Login to DockerHub
         if: github.event_name != 'pull_request'
@@ -53,7 +53,7 @@ jobs:
           images: tuwienspaceteam/sts1-cobc
           flavor: |
             latest=auto
-            suffix=linux-x86
+            suffix=-linux-x86,onlatest=true
           tags: |
             type=semver,pattern={{version}}
       -
