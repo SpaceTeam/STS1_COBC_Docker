@@ -1,4 +1,4 @@
-name: ci
+name: Docker build and push CI
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - 'v*'
 
 jobs:
-  docker:
+  docker-full:
     runs-on: ubuntu-latest
     steps:
       -
@@ -18,6 +18,11 @@ jobs:
         uses: docker/metadata-action@v4
         with:
           images: tuwienspaceteam/sts1-cobc
+          flavor: |
+            latest=auto
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{version}},suffix=full
       -
         name: Login to DockerHub
         if: github.event_name != 'pull_request'
@@ -29,7 +34,40 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: .
+          context: ./full
+          push: ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
+  docker-linux-x86:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v3
+      -
+        name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: tuwienspaceteam/sts1-cobc
+          flavor: |
+            latest=auto
+            suffix=linux-x86
+          tags: |
+            type=semver,pattern={{version}}
+      -
+        name: Login to DockerHub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: ./linux-x86
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
