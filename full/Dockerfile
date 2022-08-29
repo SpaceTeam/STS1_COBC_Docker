@@ -1,17 +1,17 @@
-From ubuntu:latest
+FROM ubuntu:latest
 
 ENV HOME /
 
 RUN apt-get update && apt-get install -y \
-	build-essential \
-	clang-tidy-12 \
-	cmake \
-	cppcheck \
-	g++-multilib \
-	gcc-multilib \
-	git \
-	lcov \
-	wget \
+    build-essential \
+    clang-tidy-12 \
+    cmake \
+    cppcheck \
+    g++-multilib \
+    gcc-multilib \
+    git \
+    lcov \
+    wget \
 && rm -rf /var/lib/apt/lists/*
 
 RUN update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-12 12
@@ -20,7 +20,7 @@ RUN git clone https://github.com/ETLCPP/etl.git \
 && git clone https://github.com/foonathan/type_safe.git \
 && git clone https://github.com/foonathan/debug_assert.git \
 && git clone https://github.com/catchorg/Catch2.git \
-&& git clone --branch st_develop https://github.com/SpaceTeam/rodos.git 
+&& git clone --branch st_develop https://github.com/SpaceTeam/rodos.git
 
 # Install toolchain
 RUN wget https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu/11.3.rel1/binrel/arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi.tar.xz \
@@ -68,5 +68,5 @@ WORKDIR $HOME
 WORKDIR Catch2
 RUN git checkout v3.1.0 \
 && cmake --toolchain /linux-x86.cmake -S . -B build -DBUILD_TESTING=OFF \
-&& cmake --build build/ --target install
+&& cmake --build build --target install
 WORKDIR $HOME

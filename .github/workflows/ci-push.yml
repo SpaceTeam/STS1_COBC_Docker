@@ -8,12 +8,21 @@ on:
 
 jobs:
 
-  build:
+  build-full:
 
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile
+      run: docker build ./full --file Dockerfile
+
+  build-linux-x86:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build ./linux-x86 --file Dockerfile
 
