@@ -44,7 +44,7 @@ set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 # ##################################################################################################
 
 # Root folder containing platform specific stuff like libraries
-set(platform_root "/usr/local/ARM32")
+set(platform_root "/usr/local/stm32f411")
 list(APPEND CMAKE_FIND_ROOT_PATH "${platform_root}")
 # For some reason the toolchain file always runs twice, so REMOVE_DUPLICATES is used to get rid of
 # the 2. platform_root that gets appended
