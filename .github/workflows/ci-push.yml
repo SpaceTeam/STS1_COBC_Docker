@@ -2,14 +2,15 @@ name: Docker build CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches:
+      - master
+
   pull_request:
-    branches: [ "master" ]
+    branches:
+      - master
 
 jobs:
-
-  build-full:
-
+  build:
     runs-on: ubuntu-latest
 
     steps:
