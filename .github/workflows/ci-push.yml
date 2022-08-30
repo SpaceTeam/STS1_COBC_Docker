@@ -14,15 +14,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Build the Docker image
+
+    - name: Build the linux Docker image
+      run: docker build ./linux-x86 -t tuwienspaceteam/sts1-cobc:latest-linux-x86
+
+    - name: Build the full Docker image
       run: docker build ./full
-
-  build-linux-x86:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build ./linux-x86
 
