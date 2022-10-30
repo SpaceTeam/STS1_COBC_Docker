@@ -41,6 +41,6 @@ RUN git clone https://github.com/foonathan/type_safe.git \
 RUN git clone https://github.com/SpaceTeam/littlefs.git \
 && cd littlefs \
 && git checkout cmake \
-&& cmake --toolchain stm32f411.cmake -S . -B build \
+&& cmake --toolchain /stm32f411.cmake -S . -B build \
 && cmake --install build --prefix /usr/local/stm32f411 \
 && cd / && rm -r littlefs
