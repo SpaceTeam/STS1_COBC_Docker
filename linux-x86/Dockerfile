@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y \
 RUN update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-12 12
 
 COPY install.sh /install.sh
-COPY librairies.txt /librairies.txt
+COPY libraries.txt /libraries.txt
 
 RUN chmod +x /install.sh
 

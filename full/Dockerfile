@@ -10,7 +10,7 @@ WORKDIR $HOME
 ADD stm32f411.cmake .
 
 COPY install.sh /install.sh
-COPY librairies.txt /librairies.txt
+COPY libraries.txt /libraries.txt
 
 RUN chmod +x /install.sh
 

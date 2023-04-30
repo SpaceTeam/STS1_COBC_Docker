@@ -23,7 +23,7 @@ else
     DOCKER_BUILD=false
 fi
 
-PARAM_FILE="librairies.txt"
+PARAM_FILE="libraries.txt"
 
 while IFS=, read -r name commit repo_url; do
   echo "Cloning $name at commit $commit from $repo_url"
