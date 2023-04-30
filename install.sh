@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "hello World";
-
 if [ $# -lt 1 ]; then
   echo "Error: missing arguments. Usage: $0 [linux|full] [prefix]"
   exit 1
@@ -36,6 +34,7 @@ while IFS=, read -r name commit repo_url; do
   cd ..
 done < "$PARAM_FILE"
 
+
 cd rodos
 find . -name linux-x86.cmake | xargs cp -t $HOME -v
 cmake --toolchain cmake/port/linux-x86.cmake -S . -B build
@@ -44,7 +43,7 @@ cmake --install build
 if [[ $1 == "full" ]]; then
   cmake --toolchain cmake/port/cobc.cmake -S . -B build/cobc
   cmake --build build/cobc
-  cmake --install build/cobc --prefix /usr/local/stm32f411
+  cmake --install build/cobc --prefix "$2"
 fi
 cd ..
 
@@ -52,15 +51,17 @@ cd etl
 cmake -S . -B build
 cmake --install build
 if [[ $1 == "full" ]]; then
-  cmake --install build --prefix "$prefix"
+  cmake --install build --prefix "$2"
 fi
 cd ..
+
+
 
 cd debug_assert
 cmake -S . -B build
 cmake --install build
 if [[ $1 == "full" ]]; then
-  cmake --install build --prefix "$prefix"
+  cmake --install build --prefix "$2"
 fi
 cd ..
 
@@ -68,7 +69,7 @@ cd type_safe
 cmake -S . -B build
 cmake --install build
 if [[ $1 == "full" ]]; then
-  cmake --install build --prefix "$prefix"
+  cmake --install build --prefix "$2"
 fi
 cd ..
 
@@ -78,7 +79,7 @@ cmake --build build/ --target install
 if [[ $1 == "full" ]]; then
   cmake --toolchain /stm32f411.cmake -S . -B build/cobc
   cmake --build ./build/cobc
-  cmake --install build/cobc --prefix "$prefix"
+  cmake --install build --prefix "$2"
 fi
 cd ..
 
@@ -86,7 +87,7 @@ if [[ $1 == "full" ]]; then
   cd littlefs
   cmake --toolchain /stm32f411.cmake -S . -B build/cobc
   cmake --build ./build/cobc
-  cmake --install build/cobc --prefix "$prefix"
+  cmake --install build --prefix "$2"
   cd .. && rm -r littlefs
 fi
 
