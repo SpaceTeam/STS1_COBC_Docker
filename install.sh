@@ -37,9 +37,11 @@ done < "$PARAM_FILE"
 
 cd rodos
 find . -name linux-x86.cmake | xargs cp -t $HOME -v
-cmake --toolchain cmake/port/linux-x86.cmake -S . -B build
-cmake --build build
-cmake --install build
+if [[ $1 == "linux" ]]; then
+  cmake --toolchain cmake/port/linux-x86.cmake -S . -B build
+  cmake --build build
+  cmake --install build
+fi
 if [[ $1 == "full" ]]; then
   cmake --toolchain cmake/port/cobc.cmake -S . -B build/cobc
   cmake --build build/cobc
@@ -49,36 +51,28 @@ cd ..
 
 cd etl
 cmake -S . -B build
-cmake --install build
-if [[ $1 == "full" ]]; then
+if [[ $1 == "linux" ]]; then
+  cmake --install build
+else
   cmake --install build --prefix "$2"
 fi
 cd ..
 
-
-
 cd debug_assert
 cmake -S . -B build
-cmake --install build
-if [[ $1 == "full" ]]; then
+if [[ $1 == "linux" ]]; then
+  cmake --install build
+else
   cmake --install build --prefix "$2"
 fi
+
 cd ..
 
 cd type_safe
 cmake -S . -B build
-cmake --install build
-if [[ $1 == "full" ]]; then
-  cmake --install build --prefix "$2"
-fi
-cd ..
-
-cd Catch2
-cmake --toolchain /linux-x86.cmake -S . -B build -DBUILD_TESTING=OFF
-cmake --build build/ --target install
-if [[ $1 == "full" ]]; then
-  cmake --toolchain /stm32f411.cmake -S . -B build/cobc
-  cmake --build ./build/cobc
+if [[ $1 == "linux" ]]; then
+  cmake --install build
+else
   cmake --install build --prefix "$2"
 fi
 cd ..

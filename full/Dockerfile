@@ -15,6 +15,5 @@ COPY librairies.txt /librairies.txt
 # Make the script executable
 RUN chmod +x /install.sh
 
-RUN echo "resetting cache"
 # Run the script inside the Docker image
 RUN /install.sh full /usr/local/stm32f411
