@@ -2,9 +2,6 @@ FROM ubuntu:latest
 
 ENV HOME /
 
-COPY install.sh /install.sh
-COPY librairies.txt /librairies.txt
-
 RUN apt-get update && apt-get install -y \
     build-essential \
     clang-tidy-12 \
@@ -19,7 +16,9 @@ RUN apt-get update && apt-get install -y \
 
 RUN update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-12 12
 
-# Make the script executable
+COPY install.sh /install.sh
+COPY librairies.txt /librairies.txt
+
 RUN chmod +x /install.sh
 
 # Run the script inside the Docker image

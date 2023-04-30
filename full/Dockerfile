@@ -12,8 +12,7 @@ ADD stm32f411.cmake .
 COPY install.sh /install.sh
 COPY librairies.txt /librairies.txt
 
-# Make the script executable
 RUN chmod +x /install.sh
 
 # Run the script inside the Docker image
-RUN /install.sh full /usr/local/stm32f411
+RUN /install.sh cobc /usr/local/stm32f411
