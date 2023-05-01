@@ -6,12 +6,12 @@ if [ $# -lt 1 ]; then
 fi
 
 if [[ $1 != "linux" && $1 != "cobc" ]]; then
-  echo "Error: first argument must be either 'linux' or 'full'"
+  echo "Error: first argument must be either 'linux' or 'cobc'"
   exit 1
 fi
 
 if [[ $1 == "cobc" && $# -lt 2 ]]; then
-  echo "Error: missing prefix argument for 'full' option"
+  echo "Error: missing prefix argument for 'cobc' option"
   exit 1
 fi
 
