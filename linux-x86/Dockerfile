@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y \
     gcc-multilib \
     git \
     lcov \
+    sudo \
     wget \
 && rm -rf /var/lib/apt/lists/*
 

@@ -1,5 +1,7 @@
 FROM tuwienspaceteam/sts1-cobc:latest-linux-x86
 
+RUN apt-get update && apt-get install -y sudo
+
 # Install toolchain
 RUN wget https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu/11.3.rel1/binrel/arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi.tar.xz \
 && tar -xvf arm-gnu-toolchain-11.3.rel1-x86_64-arm-none-eabi.tar.xz -C /opt \

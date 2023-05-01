@@ -35,33 +35,41 @@ done < "$PARAM_FILE"
 
 
 cd rodos
+# We will need it later, so just copy it to the top-level directory
 find . -name linux-x86.cmake | xargs cp -t ../ -v
 if [[ $1 == "linux" ]]; then
   cmake --toolchain cmake/port/linux-x86.cmake -S . -B build
   cmake --build build
-  cmake --install build
+  sudo cmake --install build
 else
   cmake --toolchain cmake/port/cobc.cmake -S . -B build/cobc
   cmake --build build/cobc
-  cmake --install build/cobc --prefix "$2"
+  sudo cmake --install build/cobc --prefix "$2"
 fi
 cd ..
+
+if [[ $1 == "linux" ]]; then
+  cd Catch2
+  cmake --toolchain ../linux-x86.cmake -S . -B build -DBUILD_TESTING=OFF
+  sudo cmake --build build/ --target install
+  cd ..
+fi
 
 cd etl
 cmake -S . -B build
 if [[ $1 == "linux" ]]; then
-  cmake --install build
+  sudo cmake --install build
 else
-  cmake --install build --prefix "$2"
+  sudo cmake --install build --prefix "$2"
 fi
 cd ..
 
 cd debug_assert
 cmake -S . -B build
 if [[ $1 == "linux" ]]; then
-  cmake --install build
+  sudo cmake --install build
 else
-  cmake --install build --prefix "$2"
+  sudo cmake --install build --prefix "$2"
 fi
 
 cd ..
@@ -69,33 +77,28 @@ cd ..
 cd type_safe
 cmake -S . -B build
 if [[ $1 == "linux" ]]; then
-  cmake --install build
+  sudo cmake --install build
 else
-  cmake --install build --prefix "$2"
+  sudo cmake --install build --prefix "$2"
 fi
 cd ..
 
-if [[ $1 == "linux" ]]; then
-  cd Catch2
-  cmake --toolchain ../linux-x86.cmake -S . -B build -DBUILD_TESTING=OFF
-  cmake --build build/ --target install
-  cd ..
-fi
 
 if [[ $1 == "cobc" ]]; then
   cd littlefs
   cmake --toolchain ../stm32f411.cmake -S . -B build/cobc
   cmake --build ./build/cobc
-  cmake --install build/cobc --prefix "$2"
-  cd .. && rm -r littlefs
+  sudo cmake --install build/cobc --prefix "$2"
+  cd .. 
 fi
 
 # Remove cloned repositories to save space in docker image
 if [ "$DOCKER_BUILD" = true ]; then
   echo "Removing repositories"
   rm -r rodos
+  rm -r Catch2
+  rm -r littlefs
   rm -r etl
   rm -r debug_assert
   rm -r type_safe
-  rm -r Catch2
 fi
