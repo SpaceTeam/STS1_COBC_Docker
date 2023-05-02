@@ -16,6 +16,12 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Copy scripts to linux-x86 build context
+      run: cp install.sh ./linux-x86/. && cp libraries.txt ./linux-x86/.
+
+    - name: Copy scripts to full build contexts 
+      run: cp install.sh ./full/. && cp libraries.txt ./full/.
+
     - name: Build the linux Docker image
       run: docker build ./linux-x86 -t tuwienspaceteam/sts1-cobc:latest-linux-x86
 
