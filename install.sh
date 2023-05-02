@@ -25,11 +25,11 @@ fi
 
 PARAM_FILE="libraries.txt"
 
-while IFS=, read -r name commit repo_url; do
-  echo "Cloning $name at commit $commit from $repo_url"
+while IFS=, read -r name reference repo_url; do
+  echo "Cloning $name at reference $reference from $repo_url"
   git clone "$repo_url"
   cd "$name"
-  git checkout -q "$commit"
+  git checkout -q "$reference"
   cd ..
 done < "$PARAM_FILE"
 
@@ -38,9 +38,9 @@ cd rodos
 # We will need it later, so just copy it to the top-level directory
 find . -name linux-x86.cmake | xargs cp -t ../ -v
 if [[ $1 == "linux" ]]; then
-  cmake --toolchain cmake/port/linux-x86.cmake -S . -B build
-  cmake --build build
-  sudo cmake --install build
+  cmake --toolchain cmake/port/linux-x86.cmake -S . -B build/linux-x86
+  cmake --build build/linux-x86
+  sudo cmake --install build/linux-x86
 else
   cmake --toolchain cmake/port/cobc.cmake -S . -B build/cobc
   cmake --build build/cobc
