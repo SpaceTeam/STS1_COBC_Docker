@@ -16,6 +16,7 @@ RUN apt-get update -qq && apt-get install -y -qq \
     make \
     sudo \
     wget \
+    xz-utils \
 && rm -rf /var/lib/apt/lists/*
 
 RUN update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-12 12
