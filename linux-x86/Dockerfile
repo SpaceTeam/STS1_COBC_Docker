@@ -1,11 +1,11 @@
-FROM ubuntu:latest
+FROM ubuntu:22.04
 
 ENV HOME /
 
 RUN apt-get update && apt-get install -y \
     build-essential \
     clang-tidy-12 \
-    cmake \
+    cmake>3.22 \
     cppcheck \
     g++-multilib \
     gcc-multilib \
