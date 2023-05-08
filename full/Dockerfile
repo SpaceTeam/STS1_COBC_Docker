@@ -6,7 +6,6 @@ RUN apt-get update -qq && apt-get install -y sudo -qq
 RUN wget https://developer.arm.com/-/media/Files/downloads/gnu/12.2.rel1/binrel/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi.tar.xz -nv \
 && wget https://developer.arm.com/-/media/Files/downloads/gnu/12.2.rel1/binrel/arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi.tar.xz.sha256asc -nv \
 && sha256sum --check arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi.tar.xz.sha256asc \
-&& if [ $? -eq 0 ]; then echo "Checksum OK"; else echo "Checksum verification failed!"; exit 1; fi \
 && tar -xvf arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi.tar.xz -C /opt \
 && rm arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi.tar.xz arm-gnu-toolchain-12.2.rel1-x86_64-arm-none-eabi.tar.xz.sha256asc
 
