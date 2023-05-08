@@ -3,6 +3,7 @@ FROM ubuntu:latest
 ENV HOME /
 
 RUN apt-get update -qq && apt-get install -y -qq \
+    ca-certificates \
     clang-tidy-12 \
     cmake \
     cppcheck \
