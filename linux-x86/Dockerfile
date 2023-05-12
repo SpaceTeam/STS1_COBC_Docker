@@ -32,3 +32,5 @@ RUN chmod +x /install.sh
 
 # Run the script inside the Docker image
 RUN /install.sh linux
+
+ENTRYPOINT ["/bin/bash", "-c"]

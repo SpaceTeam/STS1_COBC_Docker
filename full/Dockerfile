@@ -32,3 +32,5 @@ RUN chmod +x /install.sh
 
 # Run the script inside the Docker image
 RUN /install.sh cobc /usr/local/stm32f411
+
+ENTRYPOINT ["/bin/bash", "-c"]
