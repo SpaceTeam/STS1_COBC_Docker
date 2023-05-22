@@ -1,21 +1,21 @@
-FROM ubuntu:22.04
+FROM ubuntu:22.10
 
 ENV HOME /
 
 RUN apt-get update -qq && apt-get install -y -qq \
     ca-certificates \
-    clangd-12 \
-    clang-format-12 \
-    clang-tidy-12 \
-    cmake=3.22.* \
+    clang-format-15 \
+    clang-tidy-15 \
+    clangd-15 \
+    cmake=3.24.* \
     cppcheck \
+    g++-12 \
+    g++-12-multilib \
     gcc-12 \
     gcc-12-multilib \
     git \
-    g++-12 \
-    g++-12-multilib \
     lcov \
-    libc6-dev \
+    make \
     make \
     python3-pip \
     sudo \
@@ -23,11 +23,12 @@ RUN apt-get update -qq && apt-get install -y -qq \
     xz-utils \
 && rm -rf /var/lib/apt/lists/*
 
+
 # Setup tools versions
-RUN update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-12 12
-RUN update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-12 12
-RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 12
+RUN update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-15 15
+RUN update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-15 15
 RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-12 12
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 12
 
 # Install cmake-format
 RUN pip3 install cmake-format
