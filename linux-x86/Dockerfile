@@ -1,21 +1,19 @@
-FROM ubuntu:22.04
+FROM ubuntu:22.10
 
 ENV HOME /
 
 RUN apt-get update -qq && apt-get install -y -qq \
     ca-certificates \
-    clangd-12 \
-    clang-format-12 \
-    clang-tidy-12 \
-    cmake=3.22.* \
+    clang-format-15 \
+    clang-tidy-15 \
+    clangd-15 \
     cppcheck \
+    g++-12 \
+    g++-12-multilib \
     gcc-12 \
     gcc-12-multilib \
     git \
-    g++-12 \
-    g++-12-multilib \
     lcov \
-    libc6-dev \
     make \
     python3-pip \
     sudo \
@@ -24,10 +22,30 @@ RUN apt-get update -qq && apt-get install -y -qq \
 && rm -rf /var/lib/apt/lists/*
 
 # Setup tools versions
-RUN update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-12 12
-RUN update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-12 12
-RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 12
+RUN update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-15 15
+RUN update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-15 15
 RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-12 12
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 12
+
+#Install CMake 3.22
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.22.0/cmake-3.22.0-linux-x86_64.tar.gz -q
+RUN sudo tar xz -f /cmake-3.22.0-linux-x86_64.tar.gz -C /opt
+# Setting PATH for both normal and sudo users
+ENV PATH="/opt/cmake-3.22.0-linux-x86_64/bin:$PATH"
+RUN echo "Defaults        secure_path=\"/opt/cmake-3.22.0-linux-x86_64/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\"" >> /etc/sudoers
+RUN cmake --version
+RUN sudo cmake --version
+
+# Check for possible mismatch between g++ and gcov versions
+RUN GCC_VERSION=$(g++ -dumpfullversion) \
+&& GCOV_VERSION=$( gcov --version | head -n 1 | grep -oP "\b\d{1,2}\.\d{1,2}\.\d{1,2}\b" | head -n 1) \
+&& if [ "$GCC_VERSION" = "$GCOV_VERSION" ]; \
+    then \
+        echo "Versions match: gcov $GCOV_VERSION and g++ $GCC_VERSION"; \
+    else \
+        echo "Error: g++ version is $GCC_VERSION but gcov version is $GCOV_VERSION"; \
+        exit 1; \
+    fi
 
 # Install cmake-format
 RUN pip3 install cmake-format
