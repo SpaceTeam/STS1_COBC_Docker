@@ -24,6 +24,7 @@ RUN apt-get update -qq && apt-get install -y -qq \
 # Setup tools versions
 RUN update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-15 15
 RUN update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-15 15
+RUN update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-15 15
 RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-12 12
 RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 12
 
