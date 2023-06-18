@@ -47,8 +47,9 @@ RUN GCC_VERSION=$(g++ -dumpfullversion) \
         exit 1; \
     fi
 
-# Install cmake-format
+# Install cmake-format and codespell
 RUN pip3 install cmake-format
+RUN pip3 install codespell
 
 # Install posh-git-sh
 RUN git clone https://github.com/lyze/posh-git-sh.git
