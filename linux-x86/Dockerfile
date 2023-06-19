@@ -18,6 +18,7 @@ RUN apt-get update -qq && apt-get install -y -qq \
     ninja-build \
     python3-pip \
     sudo \
+    vim \
     wget \
     xz-utils \
 && rm -rf /var/lib/apt/lists/*
