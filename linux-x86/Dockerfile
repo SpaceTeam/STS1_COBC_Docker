@@ -54,6 +54,9 @@ RUN GCC_VERSION=$(g++ -dumpfullversion) \
 RUN pip3 install cmake-format
 RUN pip3 install codespell
 
+# Enable tab completion for git
+RUN echo 'source /usr/share/bash-completion/completions/git' >> /.bashrc
+
 # Install posh-git-sh
 RUN git clone https://github.com/lyze/posh-git-sh.git
 RUN echo 'source /posh-git-sh/git-prompt.sh' >> /.bashrc
