@@ -61,7 +61,6 @@ RUN echo 'source /usr/share/bash-completion/completions/git' >> /.bashrc
 RUN git clone https://github.com/lyze/posh-git-sh.git
 RUN echo 'source /posh-git-sh/git-prompt.sh' >> /.bashrc
 RUN echo "PROMPT_COMMAND='__posh_git_ps1 \"\\u@\\h:\\w \" \"\\\$ \";'$PROMPT_COMMAND" >> .bashrc
-RUN git config --global bash.enableStashStatus false
 
 # Install libraries
 COPY install.sh /install.sh
