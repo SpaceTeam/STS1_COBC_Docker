@@ -1,6 +1,6 @@
 FROM ubuntu:22.10
 
-ENV HOME /
+ENV HOME="/"
 
 RUN apt-get update -qq && apt-get install -y -qq \
     ca-certificates \
@@ -30,7 +30,7 @@ RUN update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-15 15
 RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-12 12
 RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 12
 
-#Install CMake 3.22
+# Install CMake 3.22
 RUN wget https://github.com/Kitware/CMake/releases/download/v3.22.0/cmake-3.22.0-linux-x86_64.tar.gz -q
 RUN sudo tar xz -f /cmake-3.22.0-linux-x86_64.tar.gz -C /opt
 # Setting PATH for both normal and sudo users
@@ -38,6 +38,12 @@ ENV PATH="/opt/cmake-3.22.0-linux-x86_64/bin:$PATH"
 RUN echo "Defaults        secure_path=\"/opt/cmake-3.22.0-linux-x86_64/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\"" >> /etc/sudoers
 RUN cmake --version
 RUN sudo cmake --version
+
+# Install clang-tidy-cache
+ENV CTCACHE_DIR="/.cache/clang-tidy"
+RUN mkdir -p ${CTCACHE_DIR}
+
+RUN wget https://raw.githubusercontent.com/matus-chochlik/ctcache/main/clang-tidy-cache -O /usr/local/bin/clang-tidy-cache && chmod +x /usr/local/bin/clang-tidy-cache
 
 # Check for possible mismatch between g++ and gcov versions
 RUN GCC_VERSION=$(g++ -dumpfullversion) \
