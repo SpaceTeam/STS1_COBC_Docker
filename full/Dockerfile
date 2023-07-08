@@ -33,4 +33,7 @@ RUN chmod +x /install.sh
 # Run the script inside the Docker image
 RUN /install.sh cobc /usr/local/stm32f411
 
+# Install standalone outcome experimental single-header library
+RUN cd /usr/local/stm32f411/include && wget https://github.com/ned14/outcome/raw/master/single-header/outcome-experimental.hpp
+
 ENTRYPOINT ["/bin/bash", "-c"]

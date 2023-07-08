@@ -73,5 +73,8 @@ COPY install.sh /install.sh
 COPY libraries.txt /libraries.txt
 RUN chmod +x /install.sh && ./install.sh linux
 
+# Install standalone outcome experimental single-header library
+RUN cd /usr/local/include && wget https://github.com/ned14/outcome/raw/master/single-header/outcome-experimental.hpp
+
 # Define entrypoint
 ENTRYPOINT ["/bin/bash", "-c"]
