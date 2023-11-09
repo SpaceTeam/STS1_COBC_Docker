@@ -64,6 +64,10 @@ set(compile_and_link_options -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=softf
 add_compile_options(${compile_and_link_options})
 add_compile_options(-gdwarf-2 -mthumb -g3)
 
+# Definitions for Experimental Outcome
+add_compile_definitions(SYSTEM_ERROR2_NOT_POSIX)
+add_compile_definitions(OUTCOME_DISABLE_EXECINFO)
+
 add_link_options(${compile_and_link_options})
 add_link_options(-Wl,-T${linker_script})
 add_link_options(

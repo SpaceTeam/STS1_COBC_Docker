@@ -1,4 +1,4 @@
-FROM ubuntu:22.10
+FROM ubuntu:23.04
 
 ENV HOME="/"
 
@@ -16,6 +16,7 @@ RUN apt-get update -qq && apt-get install -y -qq \
     lcov \
     make \
     ninja-build \
+    pipx \
     python3-pip \
     sudo \
     vim \
@@ -34,7 +35,7 @@ RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 12
 RUN wget https://github.com/Kitware/CMake/releases/download/v3.22.0/cmake-3.22.0-linux-x86_64.tar.gz -q
 RUN sudo tar xz -f /cmake-3.22.0-linux-x86_64.tar.gz -C /opt
 # Setting PATH for both normal and sudo users
-ENV PATH="/opt/cmake-3.22.0-linux-x86_64/bin:$PATH"
+ENV PATH="/.local/bin:/opt/cmake-3.22.0-linux-x86_64/bin:$PATH"
 RUN echo "Defaults        secure_path=\"/opt/cmake-3.22.0-linux-x86_64/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\"" >> /etc/sudoers
 RUN cmake --version
 RUN sudo cmake --version
@@ -57,8 +58,8 @@ RUN GCC_VERSION=$(g++ -dumpfullversion) \
     fi
 
 # Install cmake-format and codespell
-RUN pip3 install cmake-format
-RUN pip3 install codespell
+RUN pipx install cmakelang # contains cmake-format
+RUN pipx install codespell
 
 # Enable tab completion for git
 RUN echo 'source /usr/share/bash-completion/completions/git' >> /.bashrc
