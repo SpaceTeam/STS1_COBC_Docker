@@ -4,3 +4,4 @@ debug_assert,c0b325e9023cc021bce0d23c8b4211f8e5b071d0,https://github.com/foonath
 type_safe,b9138d8a26ea9bbab965f87ee925f53fde025fd9,https://github.com/foonathan/type_safe.git
 Catch2,v3.1.0,https://github.com/catchorg/Catch2.git
 littlefs,cmake,https://github.com/SpaceTeam/littlefs.git
+NamedType,master,https://github.com/joboccara/NamedType.git

@@ -83,6 +83,15 @@ else
 fi
 cd ..
 
+cd NamedType
+cmake -S . -B build
+if [[ $1 == "linux" ]]; then
+  sudo cmake --install build
+else
+  sudo cmake --install build --prefix "$2"
+fi
+cd ..
+
 
 if [[ $1 == "cobc" ]]; then
   cd littlefs
