@@ -5,3 +5,4 @@ type_safe,b9138d8a26ea9bbab965f87ee925f53fde025fd9,https://github.com/foonathan/
 Catch2,v3.1.0,https://github.com/catchorg/Catch2.git
 littlefs,cmake,https://github.com/SpaceTeam/littlefs.git
 NamedType,master,https://github.com/joboccara/NamedType.git
+include-what-you-use,clang_15,https://github.com/include-what-you-use/include-what-you-use.git
