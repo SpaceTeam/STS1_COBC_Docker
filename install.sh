@@ -101,6 +101,14 @@ if [[ $1 == "cobc" ]]; then
   cd .. 
 fi
 
+if [[ $1 == "linux" ]]; then
+  cd include-what-you-use
+  cmake -S . -B build -G "Ninja" -DCMAKE_PREFIX_PATH=/usr/lib/llvm-15
+  cmake --build build
+  sudo cmake --install build
+  cd ..
+fi
+
 # Remove cloned repositories to save space in docker image
 if [ "$DOCKER_BUILD" = true ]; then
   echo "Removing repositories"

@@ -14,6 +14,7 @@ RUN apt-get update -qq && apt-get install -y -qq \
     gcc-12-multilib \
     git \
     lcov \
+    libclang-15-dev \
     make \
     ninja-build \
     pipx \
