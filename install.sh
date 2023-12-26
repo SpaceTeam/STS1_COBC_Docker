@@ -103,10 +103,10 @@ fi
 
 if [[ $1 == "linux" ]]; then
   cd include-what-you-use
-  mkdir build && cd build
-  cmake -G "Unix Makefiles" -DCMAKE_PREFIX_PATH=/usr/lib/llvm-15 ../
-  sudo make install
-  cd ../..
+  cmake -S . -B build -G "Ninja" -DCMAKE_PREFIX_PATH=/usr/lib/llvm-15
+  cmake --build build
+  sudo cmake --install build
+  cd ..
 fi
 
 # Remove cloned repositories to save space in docker image
