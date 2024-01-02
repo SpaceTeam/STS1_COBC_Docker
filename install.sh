@@ -71,16 +71,6 @@ if [[ $1 == "linux" ]]; then
 else
   sudo cmake --install build --prefix "$2"
 fi
-
-cd ..
-
-cd type_safe
-cmake -S . -B build
-if [[ $1 == "linux" ]]; then
-  sudo cmake --install build
-else
-  sudo cmake --install build --prefix "$2"
-fi
 cd ..
 
 cd NamedType
