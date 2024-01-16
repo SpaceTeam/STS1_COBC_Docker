@@ -1,4 +1,4 @@
-rodos,8bf3cab247feb6826f569822e03f970b90210dc6,https://github.com/SpaceTeam/rodos.git
+rodos,0dd30adb373972b9adf2a4a4eb0b068130f45f53,https://github.com/SpaceTeam/rodos.git
 etl,cceb5038664a4fa363e79709bc08bd0bb356ae50,https://github.com/ETLCPP/etl.git
 debug_assert,c0b325e9023cc021bce0d23c8b4211f8e5b071d0,https://github.com/foonathan/debug_assert.git
 Catch2,v3.1.0,https://github.com/catchorg/Catch2.git
