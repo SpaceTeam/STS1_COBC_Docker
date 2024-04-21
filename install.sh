@@ -82,14 +82,17 @@ else
 fi
 cd ..
 
-
-if [[ $1 == "cobc" ]]; then
-  cd littlefs
+cd littlefs
+if [[ $1 == "linux" ]]; then
+  cmake --toolchain ../linux-x86.cmake -S . -B build/linux-x86
+  cmake --build build/linux-x86
+  sudo cmake --install build/linux-x86
+else
   cmake --toolchain ../stm32f411.cmake -S . -B build/cobc
   cmake --build ./build/cobc
   sudo cmake --install build/cobc --prefix "$2"
-  cd .. 
 fi
+cd ..
 
 if [[ $1 == "linux" ]]; then
   cd include-what-you-use
