@@ -2,7 +2,7 @@ FROM ubuntu:23.04
 
 ENV HOME="/"
 
-RUN apt-get update -qq && apt-get install -y -qq \
+RUN dpkg --add-architecture i386 && apt-get update -qq && apt-get install -y -qq \
     ca-certificates \
     clang-format-15 \
     clang-tidy-15 \
@@ -12,14 +12,17 @@ RUN apt-get update -qq && apt-get install -y -qq \
     g++-12-multilib \
     gcc-12 \
     gcc-12-multilib \
+    gdb \
     git \
     lcov \
+    libc6-dbg:i386 \
     libclang-15-dev \
     make \
     ninja-build \
     pipx \
     python3-pip \
     sudo \
+    valgrind \
     vim \
     wget \
     xz-utils \
