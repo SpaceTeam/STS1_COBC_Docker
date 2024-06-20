@@ -84,11 +84,11 @@ cd ..
 
 cd littlefs
 if [[ $1 == "linux" ]]; then
-  cmake --toolchain ../linux-x86.cmake -DLFS_THREADSAFE=ON -S . -B build/linux-x86
+  cmake --toolchain ../linux-x86.cmake -DLFS_THREADSAFE=ON -DLFS_NO_MALLOC=ON -S . -B build/linux-x86
   cmake --build build/linux-x86
   sudo cmake --install build/linux-x86
 else
-  cmake --toolchain ../stm32f411.cmake -DLFS_THREADSAFE=ON -S . -B build/cobc
+  cmake --toolchain ../stm32f411.cmake -DLFS_THREADSAFE=ON -DLFS_NO_MALLOC=ON -S . -B build/cobc
   cmake --build ./build/cobc
   sudo cmake --install build/cobc --prefix "$2"
 fi
