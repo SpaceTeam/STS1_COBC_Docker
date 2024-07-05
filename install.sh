@@ -97,9 +97,9 @@ fi
 if [ "$DOCKER_BUILD" = true ]; then
   echo "Removing repositories"
   rm -r rodos
+  rm -r etl
   rm -r Catch2
   rm -r littlefs
-  rm -r etl
-  rm -r debug_assert
-  rm -r type_safe
+  rm -r strong_type
+  rm -r include-what-you-use
 fi
