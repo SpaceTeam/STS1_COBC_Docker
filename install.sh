@@ -64,16 +64,7 @@ else
 fi
 cd ..
 
-cd debug_assert
-cmake -S . -B build
-if [[ $1 == "linux" ]]; then
-  sudo cmake --install build
-else
-  sudo cmake --install build --prefix "$2"
-fi
-cd ..
-
-cd NamedType
+cd strong_type
 cmake -S . -B build
 if [[ $1 == "linux" ]]; then
   sudo cmake --install build
