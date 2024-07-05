@@ -48,13 +48,6 @@ else
 fi
 cd ..
 
-if [[ $1 == "linux" ]]; then
-  cd Catch2
-  cmake --toolchain ../linux-x86.cmake -S . -B build -DBUILD_TESTING=OFF
-  sudo cmake --build build/ --target install
-  cd ..
-fi
-
 cd etl
 cmake -S . -B build
 if [[ $1 == "linux" ]]; then
@@ -64,14 +57,12 @@ else
 fi
 cd ..
 
-cd strong_type
-cmake -S . -B build
 if [[ $1 == "linux" ]]; then
-  sudo cmake --install build
-else
-  sudo cmake --install build --prefix "$2"
+  cd Catch2
+  cmake --toolchain ../linux-x86.cmake -S . -B build -DBUILD_TESTING=OFF
+  sudo cmake --build build/ --target install
+  cd ..
 fi
-cd ..
 
 cd littlefs
 if [[ $1 == "linux" ]]; then
@@ -82,6 +73,15 @@ else
   cmake --toolchain ../stm32f411.cmake -DLFS_THREADSAFE=ON -DLFS_NO_MALLOC=OFF -S . -B build/cobc
   cmake --build ./build/cobc
   sudo cmake --install build/cobc --prefix "$2"
+fi
+cd ..
+
+cd strong_type
+cmake -S . -B build
+if [[ $1 == "linux" ]]; then
+  sudo cmake --install build
+else
+  sudo cmake --install build --prefix "$2"
 fi
 cd ..
 
