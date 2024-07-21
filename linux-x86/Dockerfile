@@ -4,6 +4,7 @@ ENV HOME="/"
 
 RUN dpkg --add-architecture i386 && apt-get update -qq && apt-get install -y -qq \
     ca-certificates \
+    ccache \
     clang-format-15 \
     clang-tidy-15 \
     clangd-15 \
