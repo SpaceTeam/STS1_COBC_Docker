@@ -2,5 +2,5 @@ rodos,0dd30adb373972b9adf2a4a4eb0b068130f45f53,https://github.com/SpaceTeam/rodo
 etl,cceb5038664a4fa363e79709bc08bd0bb356ae50,https://github.com/ETLCPP/etl.git
 Catch2,v3.1.0,https://github.com/catchorg/Catch2.git
 littlefs,8e53bfeda7716ed7056a2b519bba45f40dea7df0,https://github.com/SpaceTeam/littlefs.git
-strong_type,db35dfe162a3c758398c638851ff4db9d421a037,https://github.com/SpaceTeam/strong_type.git
+strong_type,v15,https://github.com/rollbear/strong_type.git
 include-what-you-use,0.19,https://github.com/include-what-you-use/include-what-you-use.git
