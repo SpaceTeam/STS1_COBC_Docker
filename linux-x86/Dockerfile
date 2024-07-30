@@ -9,10 +9,10 @@ RUN dpkg --add-architecture i386 && apt-get update -qq && apt-get install -y -qq
     clang-tidy-15 \
     clangd-15 \
     cppcheck \
-    g++-12 \
-    g++-12-multilib \
-    gcc-12 \
-    gcc-12-multilib \
+    g++-13 \
+    g++-13-multilib \
+    gcc-13 \
+    gcc-13-multilib \
     gdb \
     git \
     lcov \
@@ -30,12 +30,12 @@ RUN dpkg --add-architecture i386 && apt-get update -qq && apt-get install -y -qq
 && rm -rf /var/lib/apt/lists/*
 
 # Setup tools versions
-RUN update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-15 99
-RUN update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-15 99
-RUN update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-15 99
-RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-12 99
-RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-12 99
-RUN update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-12 99
+RUN update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-15 15
+RUN update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-15 15
+RUN update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-15 15
+RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 13
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 13
+RUN update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-13 13
 
 # Install CMake 3.22
 RUN wget https://github.com/Kitware/CMake/releases/download/v3.22.0/cmake-3.22.0-linux-x86_64.tar.gz -q
