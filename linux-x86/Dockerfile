@@ -49,7 +49,7 @@ RUN sudo cmake --version
 ENV CTCACHE_DIR="/.cache/clang-tidy"
 RUN mkdir -p ${CTCACHE_DIR}
 
-RUN wget https://raw.githubusercontent.com/matus-chochlik/ctcache/main/clang-tidy-cache -O /usr/local/bin/clang-tidy-cache && chmod +x /usr/local/bin/clang-tidy-cache
+RUN wget https://raw.githubusercontent.com/matus-chochlik/ctcache/main/src/ctcache/clang_tidy_cache.py -O /usr/local/bin/clang-tidy-cache && chmod +x /usr/local/bin/clang-tidy-cache
 
 # Check for possible mismatch between g++ and gcov versions
 RUN GCC_VERSION=$(g++ -dumpfullversion) \
