@@ -59,10 +59,20 @@ message("HSE value used: ${HSE_VALUE}")
 add_compile_definitions(HSE_VALUE=${HSE_VALUE} HSE_STARTUP_TIMEOUT=10000000)
 add_compile_definitions(USE_STDPERIPH_DRIVER STM32F411xE)
 
+# The Ninja Multi-Config generator does not support the MinSizeRel configuration by default so we
+# add it here.
+set(CMAKE_CONFIGURATION_TYPES "Debug;Release;RelWithDebInfo;MinSizeRel")
+# I thought setting the default flags for the configurations is done with the *_INIT variables but
+# that appends to the existing default flags instead of replacing them.
+set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g3 -gdwarf-2")
+set(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
+set(CMAKE_CXX_FLAGS_RELWITHDEBINFO "-O2 -g3 -gdwarf-2 -DNDEBUG")
+set(CMAKE_CXX_FLAGS_MINSIZEREL "-Os -DNDEBUG")
+
 set(compile_and_link_options -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=softfp)
 
 add_compile_options(${compile_and_link_options})
-add_compile_options(-gdwarf-2 -mthumb -g3)
+add_compile_options(-mthumb -ffunction-sections -fdata-sections)
 
 # Definitions for Experimental Outcome
 add_compile_definitions(SYSTEM_ERROR2_NOT_POSIX)
