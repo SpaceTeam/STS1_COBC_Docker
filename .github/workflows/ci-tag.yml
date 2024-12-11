@@ -7,7 +7,7 @@ on:
 
 jobs:
   docker-linux-x86:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout
@@ -45,13 +45,13 @@ jobs:
   docker-full:
     needs: docker-linux-x86
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Copy scripts to full build contexts 
+      - name: Copy scripts to full build contexts
         run: cp install.sh ./full/. && cp libraries.txt ./full/.
 
       - name: Docker meta
