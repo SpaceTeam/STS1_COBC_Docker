@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
     - uses: actions/checkout@v3
@@ -19,7 +19,7 @@ jobs:
     - name: Copy scripts to linux-x86 build context
       run: cp install.sh ./linux-x86/. && cp libraries.txt ./linux-x86/.
 
-    - name: Copy scripts to full build contexts 
+    - name: Copy scripts to full build contexts
       run: cp install.sh ./full/. && cp libraries.txt ./full/.
 
     - name: Build the linux Docker image
@@ -27,4 +27,3 @@ jobs:
 
     - name: Build the full Docker image
       run: docker build ./full
-
