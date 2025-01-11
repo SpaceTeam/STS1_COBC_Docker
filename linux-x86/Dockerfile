@@ -48,6 +48,7 @@ RUN sudo cmake --version
 
 # Install clang-tidy-cache
 ENV CTCACHE_DIR="/.cache/clang-tidy"
+ENV CTCACHE_SAVE_OUTPUT=1
 RUN mkdir -p ${CTCACHE_DIR}
 
 RUN wget https://raw.githubusercontent.com/matus-chochlik/ctcache/main/src/ctcache/clang_tidy_cache.py -O /usr/local/bin/clang-tidy-cache && chmod +x /usr/local/bin/clang-tidy-cache
