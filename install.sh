@@ -38,13 +38,19 @@ cd rodos
 # We will need it later, so just copy it to the top-level directory
 find . -name linux-x86.cmake | xargs cp -t ../ -v
 if [[ $1 == "linux" ]]; then
-  cmake --toolchain cmake/port/linux-x86.cmake -DCMAKE_BUILD_TYPE=MinSizeRel -S . -B build/linux-x86
-  cmake --build build/linux-x86
-  sudo cmake --install build/linux-x86
+  cmake --toolchain cmake/port/linux-x86.cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEBUG_POSTFIX=d -S . -B build/linux-x86/Debug
+  cmake --build build/linux-x86/Debug
+  sudo cmake --install build/linux-x86/Debug
+  cmake --toolchain cmake/port/linux-x86.cmake -DCMAKE_BUILD_TYPE=MinSizeRel -S . -B build/linux-x86/MinSizeRel
+  cmake --build build/linux-x86/MinSizeRel
+  sudo cmake --install build/linux-x86/MinSizeRel
 else
-  cmake --toolchain cmake/port/cobc.cmake -DCMAKE_BUILD_TYPE=MinSizeRel -S . -B build/cobc
-  cmake --build build/cobc
-  sudo cmake --install build/cobc --prefix "$2"
+  cmake --toolchain cmake/port/cobc.cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEBUG_POSTFIX=d -S . -B build/cobc/Debug
+  cmake --build build/cobc/Debug
+  sudo cmake --install build/cobc/Debug --prefix "$2"
+  cmake --toolchain cmake/port/cobc.cmake -DCMAKE_BUILD_TYPE=MinSizeRel -S . -B build/cobc/MinSizeRel
+  cmake --build build/cobc/MinSizeRel
+  sudo cmake --install build/cobc/MinSizeRel --prefix "$2"
 fi
 cd ..
 
@@ -66,13 +72,19 @@ fi
 
 cd littlefs
 if [[ $1 == "linux" ]]; then
-  cmake --toolchain ../linux-x86.cmake -DLFS_THREADSAFE=ON -DLFS_NO_MALLOC=OFF -DCMAKE_BUILD_TYPE=MinSizeRel -S . -B build/linux-x86
-  cmake --build build/linux-x86
-  sudo cmake --install build/linux-x86
+  cmake --toolchain ../linux-x86.cmake -DLFS_THREADSAFE=ON -DLFS_NO_MALLOC=OFF -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEBUG_POSTFIX=d -S . -B build/linux-x86/Debug
+  cmake --build build/linux-x86/Debug
+  sudo cmake --install build/linux-x86/Debug
+  cmake --toolchain ../linux-x86.cmake -DLFS_THREADSAFE=ON -DLFS_NO_MALLOC=OFF -DCMAKE_BUILD_TYPE=MinSizeRel -S . -B build/linux-x86/MinSizeRel
+  cmake --build build/linux-x86/MinSizeRel
+  sudo cmake --install build/linux-x86/MinSizeRel
 else
-  cmake --toolchain ../stm32f411.cmake -DLFS_THREADSAFE=ON -DLFS_NO_MALLOC=OFF -DCMAKE_BUILD_TYPE=MinSizeRel -S . -B build/cobc
-  cmake --build ./build/cobc
-  sudo cmake --install build/cobc --prefix "$2"
+  cmake --toolchain ../stm32f411.cmake -DLFS_THREADSAFE=ON -DLFS_NO_MALLOC=OFF -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEBUG_POSTFIX=d -S . -B build/cobc/Debug
+  cmake --build ./build/cobc/Debug
+  sudo cmake --install build/cobc --prefix "$2"/Debug
+  cmake --toolchain ../stm32f411.cmake -DLFS_THREADSAFE=ON -DLFS_NO_MALLOC=OFF -DCMAKE_BUILD_TYPE=MinSizeRel -S . -B build/cobc/MinSizeRel
+  cmake --build ./build/cobc/MinSizeRel
+  sudo cmake --install build/cobc --prefix "$2"/MinSizeRel
 fi
 cd ..
 
