@@ -37,12 +37,12 @@ RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 13
 RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 13
 RUN update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-13 13
 
-# Install CMake 3.22
-RUN wget https://github.com/Kitware/CMake/releases/download/v3.22.0/cmake-3.22.0-linux-x86_64.tar.gz -q
-RUN sudo tar xz -f /cmake-3.22.0-linux-x86_64.tar.gz -C /opt
+# Install CMake 3.31.7
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.31.7/cmake-3.31.7-linux-x86_64.tar.gz -q
+RUN sudo tar xz -f /cmake-3.31.7-linux-x86_64.tar.gz -C /opt
 # Setting PATH for both normal and sudo users
-ENV PATH="/.local/bin:/opt/cmake-3.22.0-linux-x86_64/bin:$PATH"
-RUN echo "Defaults        secure_path=\"/opt/cmake-3.22.0-linux-x86_64/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\"" >> /etc/sudoers
+ENV PATH="/.local/bin:/opt/cmake-3.31.7-linux-x86_64/bin:$PATH"
+RUN echo "Defaults        secure_path=\"/opt/cmake-3.31.7-linux-x86_64/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\"" >> /etc/sudoers
 RUN cmake --version
 RUN sudo cmake --version
 
