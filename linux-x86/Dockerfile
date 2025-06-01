@@ -2,6 +2,13 @@ FROM ubuntu:24.04
 
 ENV HOME="/"
 
+# Add the LLVM APT repository for more up-to-date packages
+RUN apt-get update -qq && apt-get install -y -qq curl gpg
+RUN curl -fsSL https://apt.llvm.org/llvm-snapshot.gpg.key | gpg --no-tty --batch --yes --dearmor -o /usr/share/keyrings/llvm-snapshot.gpg
+RUN chmod a+r /usr/share/keyrings/llvm-snapshot.gpg
+RUN echo "deb [signed-by=/usr/share/keyrings/llvm-snapshot.gpg] http://apt.llvm.org/noble/ llvm-toolchain-noble main" > /etc/apt/sources.list.d/llvm-sources.list \
+    && echo "deb-src [signed-by=/usr/share/keyrings/llvm-snapshot.gpg] http://apt.llvm.org/noble/ llvm-toolchain-noble main" >> /etc/apt/sources.list.d/llvm-sources.list
+
 RUN dpkg --add-architecture i386 && apt-get update -qq && apt-get install -y -qq \
     ca-certificates \
     ccache \
