@@ -1,6 +1,6 @@
 rodos,a76e5ac33397273c08ac9e247a7ea2308e160801,https://github.com/SpaceTeam/rodos.git
 etl,cceb5038664a4fa363e79709bc08bd0bb356ae50,https://github.com/ETLCPP/etl.git
-Catch2,v3.3.0,https://github.com/catchorg/Catch2.git
+Catch2,v3.8.1,https://github.com/catchorg/Catch2.git
 littlefs,8e53bfeda7716ed7056a2b519bba45f40dea7df0,https://github.com/SpaceTeam/littlefs.git
 strong_type,v15,https://github.com/rollbear/strong_type.git
 include-what-you-use,0.23,https://github.com/include-what-you-use/include-what-you-use.git
