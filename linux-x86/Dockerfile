@@ -2,6 +2,12 @@ FROM ubuntu:24.04
 
 ENV HOME="/"
 
+# Add the LLVM APT repository for more up-to-date packages and install the GPG key
+RUN apt-get update -qq && apt-get install -y -qq wget
+RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
+RUN echo "deb http://apt.llvm.org/noble/ llvm-toolchain-noble main" > /etc/apt/sources.list.d/llvm-sources.list \
+    && echo "deb-src http://apt.llvm.org/noble/ llvm-toolchain-noble main" >> /etc/apt/sources.list.d/llvm-sources.list
+
 RUN dpkg --add-architecture i386 && apt-get update -qq && apt-get install -y -qq \
     ca-certificates \
     ccache \
