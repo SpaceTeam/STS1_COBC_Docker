@@ -99,7 +99,7 @@ cd ..
 
 if [[ $1 == "linux" ]]; then
   cd include-what-you-use
-  cmake -S . -B build -G "Ninja" -DCMAKE_PREFIX_PATH=/usr/lib/llvm-15
+  cmake -S . -B build -G "Ninja" -DCMAKE_PREFIX_PATH=/usr/lib/llvm-19
   cmake --build build
   sudo cmake --install build
   cd ..

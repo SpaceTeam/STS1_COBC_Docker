@@ -5,9 +5,9 @@ ENV HOME="/"
 RUN dpkg --add-architecture i386 && apt-get update -qq && apt-get install -y -qq \
     ca-certificates \
     ccache \
-    clang-format-15 \
-    clang-tidy-15 \
-    clangd-15 \
+    clang-format-19 \
+    clang-tidy-19 \
+    clangd-19 \
     cppcheck \
     g++-13 \
     g++-13-multilib \
@@ -17,7 +17,7 @@ RUN dpkg --add-architecture i386 && apt-get update -qq && apt-get install -y -qq
     git \
     lcov \
     libc6-dbg:i386 \
-    libclang-15-dev \
+    libclang-19-dev \
     make \
     ninja-build \
     pipx \
@@ -30,19 +30,19 @@ RUN dpkg --add-architecture i386 && apt-get update -qq && apt-get install -y -qq
 && rm -rf /var/lib/apt/lists/*
 
 # Setup tools versions
-RUN update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-15 15
-RUN update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-15 15
-RUN update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-15 15
+RUN update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-19 19
+RUN update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-19 19
+RUN update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-19 19
 RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 13
 RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 13
 RUN update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-13 13
 
-# Install CMake 3.22
-RUN wget https://github.com/Kitware/CMake/releases/download/v3.22.0/cmake-3.22.0-linux-x86_64.tar.gz -q
-RUN sudo tar xz -f /cmake-3.22.0-linux-x86_64.tar.gz -C /opt
+# Install CMake 3.31.7
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.31.7/cmake-3.31.7-linux-x86_64.tar.gz -q
+RUN sudo tar xz -f /cmake-3.31.7-linux-x86_64.tar.gz -C /opt
 # Setting PATH for both normal and sudo users
-ENV PATH="/.local/bin:/opt/cmake-3.22.0-linux-x86_64/bin:$PATH"
-RUN echo "Defaults        secure_path=\"/opt/cmake-3.22.0-linux-x86_64/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\"" >> /etc/sudoers
+ENV PATH="/.local/bin:/opt/cmake-3.31.7-linux-x86_64/bin:$PATH"
+RUN echo "Defaults        secure_path=\"/opt/cmake-3.31.7-linux-x86_64/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\"" >> /etc/sudoers
 RUN cmake --version
 RUN sudo cmake --version
 
