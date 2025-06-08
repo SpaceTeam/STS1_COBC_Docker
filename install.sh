@@ -88,6 +88,24 @@ else
 fi
 cd ..
 
+cd libfec
+if [[ $1 == "linux" ]]; then
+  cmake --toolchain ../linux-x86.cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEBUG_POSTFIX=d -S . -B build/linux-x86/Debug
+  cmake --build build/linux-x86/Debug
+  sudo cmake --install build/linux-x86/Debug
+  cmake --toolchain ../linux-x86.cmake -DCMAKE_BUILD_TYPE=MinSizeRel -S . -B build/linux-x86/MinSizeRel
+  cmake --build build/linux-x86/MinSizeRel
+  sudo cmake --install build/linux-x86/MinSizeRel
+else
+  cmake --toolchain ../stm32f411.cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_DEBUG_POSTFIX=d -S . -B build/cobc/Debug
+  cmake --build ./build/cobc/Debug
+  sudo cmake --install build/cobc/Debug --prefix "$2"
+  cmake --toolchain ../stm32f411.cmake -DCMAKE_BUILD_TYPE=MinSizeRel -S . -B build/cobc/MinSizeRel
+  cmake --build ./build/cobc/MinSizeRel
+  sudo cmake --install build/cobc/MinSizeRel --prefix "$2"
+fi
+cd ..
+
 cd strong_type
 cmake -S . -B build
 if [[ $1 == "linux" ]]; then
