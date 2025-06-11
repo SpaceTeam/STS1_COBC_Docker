@@ -50,9 +50,6 @@ list(APPEND CMAKE_FIND_ROOT_PATH "${platform_root}")
 # the 2. platform_root that gets appended
 list(REMOVE_DUPLICATES CMAKE_FIND_ROOT_PATH)
 
-set(linker_script "${platform_root}/src/rodos/src/bare-metal/stm32f4/scripts/stm32f411xe_flash.ld")
-message("Linker script used: ${linker_script}")
-
 # TODO: Find out why if(NOT DEFINED HSE_VALUE) does not work as expected and fails the second time
 # the toolchain file is run
 message("HSE value used: ${HSE_VALUE}")
@@ -79,7 +76,6 @@ add_compile_definitions(SYSTEM_ERROR2_NOT_POSIX)
 add_compile_definitions(OUTCOME_DISABLE_EXECINFO)
 
 add_link_options(${compile_and_link_options})
-add_link_options(-Wl,-T${linker_script})
 add_link_options(
     -nostartfiles -Xlinker --gc-sections -fno-unwind-tables -fno-asynchronous-unwind-tables
 )
