@@ -72,6 +72,7 @@ set(compile_and_link_options -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=softf
 
 add_compile_options(${compile_and_link_options})
 add_compile_options(-mthumb -ffunction-sections -fdata-sections)
+add_compile_options(-fno-exceptions -fno-non-call-exceptions -fno-rtti -fno-use-cxa-atexit)
 
 # Definitions for Experimental Outcome
 add_compile_definitions(SYSTEM_ERROR2_NOT_POSIX)
