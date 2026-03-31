@@ -12,19 +12,19 @@ RUN echo "deb [signed-by=/usr/share/keyrings/llvm-snapshot.gpg] http://apt.llvm.
 RUN dpkg --add-architecture i386 && apt-get update -qq && apt-get install -y -qq \
     ca-certificates \
     ccache \
-    clang-format-19 \
-    clang-tidy-19 \
-    clangd-19 \
+    clang-format-20 \
+    clang-tidy-20 \
+    clangd-20 \
     cppcheck \
-    g++-13 \
-    g++-13-multilib \
-    gcc-13 \
-    gcc-13-multilib \
+    g++-14 \
+    g++-14-multilib \
+    gcc-14 \
+    gcc-14-multilib \
     gdb \
     git \
     lcov \
     libc6-dbg:i386 \
-    libclang-19-dev \
+    libclang-20-dev \
     make \
     ninja-build \
     pipx \
@@ -37,12 +37,12 @@ RUN dpkg --add-architecture i386 && apt-get update -qq && apt-get install -y -qq
 && rm -rf /var/lib/apt/lists/*
 
 # Setup tools versions
-RUN update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-19 19
-RUN update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-19 19
-RUN update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-19 19
-RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-13 13
-RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-13 13
-RUN update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-13 13
+RUN update-alternatives --install /usr/bin/clang-format clang-format /usr/bin/clang-format-20 20
+RUN update-alternatives --install /usr/bin/clang-tidy clang-tidy /usr/bin/clang-tidy-20 20
+RUN update-alternatives --install /usr/bin/clangd clangd /usr/bin/clangd-20 20
+RUN update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-14 14
+RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-14 14
+RUN update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-14 14
 
 # Install CMake 3.31.7
 RUN wget https://github.com/Kitware/CMake/releases/download/v3.31.7/cmake-3.31.7-linux-x86_64.tar.gz -q
