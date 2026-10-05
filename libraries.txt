@@ -1,4 +1,4 @@
-rodos,48261b4a7816feac1f5b47105bebd001058ff2b8,https://github.com/SpaceTeam/rodos.git
+rodos,8ef496b3ff76c877a143d6ab9d878ef69e2dc5c7,https://github.com/SpaceTeam/rodos.git
 etl,20.43.0,https://github.com/ETLCPP/etl.git
 Catch2,v3.8.1,https://github.com/catchorg/Catch2.git
 littlefs,8e53bfeda7716ed7056a2b519bba45f40dea7df0,https://github.com/SpaceTeam/littlefs.git
